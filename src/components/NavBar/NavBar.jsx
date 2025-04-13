@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext }  from 'react';
 import { Link } from 'react-router';
-import { useContext} from 'react';
+
 
 import { UserContext } from '../../context/UserContext'
 
@@ -8,8 +8,9 @@ import { UserContext } from '../../context/UserContext'
 
 const NavBar = () => {
 
-    const [user, setUser] = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
 
+  
     const handleSignOut = () => {
         localStorage.removeItem('token');
         setUser(null);
@@ -18,6 +19,7 @@ const NavBar = () => {
 
 
     return (
+      <>
         <nav>
       {user ? (
         <ul>
@@ -33,6 +35,7 @@ const NavBar = () => {
         </ul>
       )}
     </nav>
+    </>
     );
 };
 

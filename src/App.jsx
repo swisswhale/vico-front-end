@@ -6,14 +6,15 @@ import { BrowserRouter } from 'react-router'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import NavBar from './components/NavBar/NavBar.jsx'
+import NavBar from './components/NavBar/NavBar.jsx';
+import Landing from './components/Landing/Landing.jsx';
 
 
 function App() {
   return (
     <>
   
-   {/* <NavBar /> */}
+   <NavBar />
     <h1>The Visual Conversation</h1>
     <Routes>
       <Route path='/' element={<h3>Home</h3>}></Route>
