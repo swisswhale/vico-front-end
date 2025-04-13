@@ -8,6 +8,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './components/NavBar/NavBar.jsx';
 import Landing from './components/Landing/Landing.jsx';
+import Dashboard from './components/Dashboard/DashBoard.jsx';
 
 
 function App() {
