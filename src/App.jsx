@@ -10,6 +10,7 @@ import Landing from './components/Landing/Landing.jsx';
 import Dashboard from './components/Dashboard/DashBoard.jsx';
 import ArtCollectionList from './components/ArtCollectionList/ArtCollectionList.jsx';
 import { UserContext } from './context/UserContext.jsx';
+import SignUpForm from './components/Sign-Up/SignUpForm.jsx';
 
 import * as vicoService from './services/vicoService.js';
 
@@ -56,7 +57,7 @@ function App() {
           </>
         ) : (
           <>
-            <Route path='/sign-up' element={<Sign-Up />} />
+            <Route path='/sign-up' element={<SignUpForm />} />
             <Route path='/sign-in' element={<Sign-In />} />
           </>
         )}
