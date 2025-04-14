@@ -10,8 +10,8 @@ const signUp = async (formData) => {
 
         const data = await res.json();
 
-        if (data.err) {
-            throw new Error(data.err);
+        if (data.error) {
+            throw new Error(data.error);
         }
 
         if (data.token) {
@@ -20,9 +20,9 @@ const signUp = async (formData) => {
         }
 
         throw new Error('Invalid response from server');
-    } catch (err) {
-        console.log(err);
-        throw new Error(err);
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -36,8 +36,8 @@ const signIn = async (formData) => {
     
         const data = await res.json();
     
-        if (data.err) {
-            throw new Error(data.err);
+        if (data.error) {
+            throw new Error(data.error);
         }
     
         if (data.token) {
@@ -46,9 +46,9 @@ const signIn = async (formData) => {
         }
     
         throw new Error('Invalid response from server');
-    } catch (err) {
-        console.log(err);
-        throw new Error(err);
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
     }
 };
 

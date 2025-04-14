@@ -54,7 +54,7 @@ const createComment = async (artCollectionId, commentFormData) => {
   }
 };
 
-const deleteHoot = async (artCollectionId) => {
+const deleteCollection = async (artCollectionId) => {
   try {
     const res = await fetch(`${BASE_URL}/${artCollectionId}`, {
       method: 'DELETE',
@@ -84,4 +84,4 @@ async function update(artCollectionId, artCollectionFormData) {
   }
 }
 
-export { index, show, create, createComment, deleteHoot, update };
+export { index, show, create, createComment, deleteCollection, update };
