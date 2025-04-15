@@ -61,6 +61,7 @@ const SignUpForm = () => {
             id='email'
             value={email}
             name='email'
+            placeholder="Email"
             onChange={handleChange}
             required
             />
@@ -72,6 +73,7 @@ const SignUpForm = () => {
             id='name'
             value={username}
             name='username'
+            placeholder="Username"
             onChange={handleChange}
             required
             />
@@ -83,6 +85,7 @@ const SignUpForm = () => {
            id='password'
            value={password}
            name='password'
+           placeholder="Password"
            onChange={handleChange}
            required
            />
@@ -93,6 +96,7 @@ const SignUpForm = () => {
             type='text'
             id='confirmPassword' 
             value={confirmPassword}
+            placeholder=" Confirm Password"
             name='confirmPassword'
             onChange={handleChange}
             required
