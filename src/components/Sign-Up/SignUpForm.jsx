@@ -11,7 +11,7 @@ const SignUpForm = () => {
  const { setUser } = useContext(UserContext);
  const [message, setMessage] = useState('');
  const [formData, setFormData] = useState({
-    // email: '',
+    // email: '', removed index from mdb
     username: '',
     password: '',
     confirmPassword: '',
