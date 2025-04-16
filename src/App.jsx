@@ -10,6 +10,7 @@ import Landing from './components/Landing/Landing.jsx';
 import Dashboard from './components/Dashboard/DashBoard.jsx';
 import ArtCollectionList from './components/ArtCollectionList/ArtCollectionList.jsx';
 import { UserContext } from './context/UserContext.jsx';
+import SignInForm from './components/Sign-In/SignInForm.jsx';
 import SignUpForm from './components/Sign-Up/SignUpForm.jsx';
 
 import * as vicoService from './services/vicoService.js';
@@ -17,7 +18,8 @@ import * as vicoService from './services/vicoService.js';
 
 function App() {
 
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user = {};
   const [artcollections, setArtCollections] = useState([]);
   const navigate = useNavigate();
 
@@ -58,7 +60,7 @@ function App() {
         ) : (
           <>
             <Route path='/sign-up' element={<SignUpForm />} />
-            <Route path='/sign-in' element={<SignInForm />} />
+            <Route path='/sign-in' element={<Sign-InForm />} />
           </>
         )}
       </Routes>

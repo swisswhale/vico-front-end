@@ -4,6 +4,7 @@ import * as userService from '../../services/userService'
 
 const Dashboard = () => {
     const { user } = useContext(UserContext);
+    // const user = {}
     const [users, setUsers] = useState([]);
 
     useEffect(()=> {
@@ -21,12 +22,12 @@ const Dashboard = () => {
 
     return (
     <main>
-        <h1>Welome to Vico, {user.username}</h1>
+        <h1>Welome to Vico, {user?.username}</h1>
         <p>The Dashboard is the page to see a list of all users.</p>
 
         <ul>
            {users.map((user)=> (
-            <li key={user._id}>{user.username}</li>
+            <li key={user?._id}>{user?.username}</li>
            ))}
         </ul>
     </main>
