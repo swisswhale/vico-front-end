@@ -18,8 +18,8 @@ import * as vicoService from './services/vicoService.js';
 
 function App() {
 
-  // const { user } = useContext(UserContext);
-  const user = {};
+  const { user } = useContext(UserContext);
+  // const user = {};
   const [artcollections, setArtCollections] = useState([]);
   const navigate = useNavigate();
 
