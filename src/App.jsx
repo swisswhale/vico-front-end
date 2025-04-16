@@ -10,7 +10,6 @@ import Landing from './pages/Landing/Landing.jsx';
 import Dashboard from './components/Dashboard/DashBoard.jsx';
 import CollectionList from './pages/CollectionList/CollectionList.jsx';
 import { UserContext } from './context/UserContext.jsx';
-import SignInForm from './components/Sign-In/SignInForm.jsx';
 import SignUpForm from './components/Sign-Up/SignUpForm.jsx';
 import SignInForm from './components/Sign-In/SignInForm.jsx';
 
@@ -61,7 +60,7 @@ function App() {
         ) : (
           <>
             <Route path='/sign-up' element={<SignUpForm />} />
-            <Route path='/sign-in' element={<Sign-InForm />} />
+            <Route path='/sign-in' element={<SignInForm />} />
           </>
         )}
       </Routes>
