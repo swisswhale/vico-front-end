@@ -1,4 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/artcollection`;
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/artwork`;
 
 const index = async () => {
   try {
@@ -11,9 +11,9 @@ const index = async () => {
   }
 };
 
-const show = async (artcollectionId) => {
+const show = async (artworkId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${artcollectionId}`, {
+    const res = await fetch(`${BASE_URL}/${artworkId}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
     return res.json();
@@ -22,7 +22,7 @@ const show = async (artcollectionId) => {
   }
 };
 
-const create = async (artCollectionFormData) => {
+const create = async (artworkFormData) => {
   try {
     const res = await fetch(BASE_URL, {
       method: 'POST',
@@ -30,7 +30,7 @@ const create = async (artCollectionFormData) => {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(artCollectionFormData),
+      body: JSON.stringify(artworkFormData),
     });
     return res.json();
   } catch (error) {
@@ -38,9 +38,9 @@ const create = async (artCollectionFormData) => {
   }
 };
 
-const createComment = async (artCollectionId, commentFormData) => {
+const createComment = async (artworkId, commentFormData) => {
   try {
-    const res = await fetch(`${BASE_URL}/${artCollectionId}/comments`, {
+    const res = await fetch(`${BASE_URL}/${artworkId}/comments`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -54,9 +54,9 @@ const createComment = async (artCollectionId, commentFormData) => {
   }
 };
 
-const deleteCollection = async (artCollectionId) => {
+const deleteArtwork = async (artworkId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${artCollectionId}`, {
+    const res = await fetch(`${BASE_URL}/${artworkId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -68,15 +68,15 @@ const deleteCollection = async (artCollectionId) => {
   }
 };
 
-async function update(artCollectionId, artCollectionFormData) {
+async function update(artworkId, artworkFormData) {
   try {
-    const res = await fetch(`${BASE_URL}/${artCollectionId}`, {
+    const res = await fetch(`${BASE_URL}/${artworkId}`, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(artCollectionFormData),
+      body: JSON.stringify(artworkFormData),
     });
     return res.json();
   } catch (error) {
@@ -84,4 +84,4 @@ async function update(artCollectionId, artCollectionFormData) {
   }
 }
 
-export { index, show, create, createComment, deleteCollection, update };
+export { index, show, create, createComment, deleteArtwork, update };

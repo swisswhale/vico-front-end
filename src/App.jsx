@@ -6,12 +6,13 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css';
 import NavBar from './components/NavBar/NavBar.jsx';
-import Landing from './components/Landing/Landing.jsx';
+import Landing from './pages/Landing/Landing.jsx';
 import Dashboard from './components/Dashboard/DashBoard.jsx';
-import ArtCollectionList from './components/ArtCollectionList/ArtCollectionList.jsx';
+import CollectionList from './pages/CollectionList/CollectionList.jsx';
 import { UserContext } from './context/UserContext.jsx';
 import SignInForm from './components/Sign-In/SignInForm.jsx';
 import SignUpForm from './components/Sign-Up/SignUpForm.jsx';
+import SignInForm from './components/Sign-In/SignInForm.jsx';
 
 import * as vicoService from './services/vicoService.js';
 
@@ -24,11 +25,11 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(()=> {
-    const fetchAllArtCollections = async () => {
-      const artCollectionsData = await vicoService.index();
-      setArtCollections(artCollectionsData);
+    const fetchAllArtwork = async () => {
+      const artworkData = await vicoService.index();
+      setArtwork(artworkData);
     };
-    if (user) fetchAllArtCollections();
+    if (user) fetchAllArtwork();
   }, [user]);
 
 
@@ -43,17 +44,17 @@ function App() {
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
         {user ? (
           <>
-            <Route path='/artcollections' element={< ArtCollectionList />} />
+            <Route path='/collections' element={<CollectionList />} />
             <Route
-              path='/artcollections/:artcollectionId'
+              path='/artwork'
               
             />
             <Route
-              path='/artcollections/new'
+              path='/collections/new'
               
             />
             <Route
-              path='/artcollections/:artcollectionId/edit'
+              path='/collections/:collectionId/edit'
               
             />
           </>
