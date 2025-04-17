@@ -11,7 +11,6 @@ const SignUpForm = () => {
  const { setUser } = useContext(UserContext);
  const [message, setMessage] = useState('');
  const [formData, setFormData] = useState({
-    // email: '', removed index from mdb
     username: '',
     password: '',
     confirmPassword: '',
@@ -53,7 +52,7 @@ const SignUpForm = () => {
                     <label htmlFor='username'>Username:</label>
                     <input 
                     type='text'
-                    id='username'
+                    id='name'
                     value={username}
                     name='username'
                     onChange={handleChange}

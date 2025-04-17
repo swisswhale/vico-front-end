@@ -1,10 +1,17 @@
 import { Link } from 'react-router';
 
-const ArtCollectionList = (props) => {
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import * as userService from '../../services/userService';
+
+const ArtCollectionList = () => {
+  const { user } = useContext(UserContext);
   return (
   <main>
-    {props.artCollection.map((collection)=> (
-   <Link key={collection._id} to={`/artcollections/${collection._id}`}>
+    
+
+    {/* {.artCollection.map((collection)=> (
+   <Link key={collection._id} to={`/collections/${collection._id}`}>
     <article>
         <header>
             <h2>{collection.title}</h2>
@@ -16,7 +23,7 @@ const ArtCollectionList = (props) => {
         <p>{collection.text}</p>
     </article>
    </Link>
-    ))}
+    ))} */}
   </main>
   );
 };

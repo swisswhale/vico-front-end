@@ -24,8 +24,8 @@ const NavBar = () => {
       {user ? (
         <ul>
           <li><Link to='/'>Home</Link></li>
-          <li><Link to='/artcollection'>Art Collection</Link></li>
-          <li><Link to='/artcollection/new'>Add To Collection</Link></li>
+          <li><Link to='/collections'>Art Collection</Link></li>
+          <li><Link to='/collections/new'>Add To Collection</Link></li>
           <li><Link to='' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (

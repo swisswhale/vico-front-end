@@ -43,7 +43,9 @@ function App() {
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
         {user ? (
           <>
-            <Route path='/collections' element={<CollectionList />} />
+            <Route path='/collections' element={<CollectionList 
+              // artCollection={}
+            />} />
             <Route
               path='/artwork'
               
