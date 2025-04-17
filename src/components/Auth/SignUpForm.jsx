@@ -26,7 +26,7 @@ const SignUpForm = () => {
  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-        const newUser = await signUp(formData);
+        const newUser = await signUp([formData]);
         setUser(newUser);
         navigate('/');
     } catch (error) {
