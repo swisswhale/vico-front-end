@@ -5,13 +5,13 @@ import { BrowserRouter } from 'react-router'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css';
-import NavBar from './components/NavBar/NavBar.jsx';
-import Landing from './pages/Landing/Landing.jsx';
+import NavBar from './components/Shared/NavBar.jsx';
+import Landing from './components/Landing/Landing.jsx';
 import Dashboard from './components/Dashboard/DashBoard.jsx';
-import CollectionList from './pages/CollectionList/CollectionList.jsx';
+import CollectionList from './components/Collection/CollectionList.jsx';
 import { UserContext } from './context/UserContext.jsx';
-import SignUpForm from './components/Sign-Up/SignUpForm.jsx';
-import SignInForm from './components/Sign-In/SignInForm.jsx';
+import SignUpForm from './components/Auth/SignUpForm.jsx';
+import SignInForm from './components/Auth/SignInForm.jsx';
 
 import * as vicoService from './services/vicoService.js';
 

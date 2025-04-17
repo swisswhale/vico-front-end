@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import * as userService from '../../services/userService';
 
-const ArtCollectionList = () => {
+const CollectionList = () => {
   const { user } = useContext(UserContext);
   return (
   <main>
@@ -28,4 +28,4 @@ const ArtCollectionList = () => {
   );
 };
 
-export default ArtCollectionList;
+export default CollectionList;
