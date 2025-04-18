@@ -12,11 +12,17 @@ import CollectionList from './components/Collection/CollectionList.jsx';
 import { UserContext } from './context/UserContext.jsx';
 import SignUpForm from './components/Auth/SignUpForm.jsx';
 import SignInForm from './components/Auth/SignInForm.jsx';
+import image from './assets/artbackground.png';
 
 import * as vicoService from './services/vicoService.js';
 
 
 function App() {
+  const myStyle= {
+    backgroundImage: `url(${image})`,
+    backgroundSize: `cover`,
+    backgroundRepeat: `no-repeat`,
+  }
 
   const { user } = useContext(UserContext);
   // const user = {};
@@ -36,7 +42,7 @@ function App() {
 
   return (
     <>
-  
+   <div style={myStyle}>
    <NavBar />
     <h1>The Visual Conversation</h1>
     <Routes>
@@ -66,6 +72,7 @@ function App() {
           </>
         )}
       </Routes>
+      </div>
     </>
   );
 };
