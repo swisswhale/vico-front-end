@@ -20,8 +20,9 @@ import * as vicoService from './services/vicoService.js';
 function App() {
   const myStyle= {
     backgroundImage: `url(${image})`,
-    backgroundSize: `cover`,
-    backgroundRepeat: `no-repeat`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    height: '100vh',
   }
 
   const { user } = useContext(UserContext);
