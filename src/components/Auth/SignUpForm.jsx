@@ -45,6 +45,7 @@ const SignUpForm = () => {
 
     return (
         <main>
+            <div className='signup-container'>
             <h1>Sign Up</h1>
             <p>{message}</p>
             <form onSubmit={handleSubmit}>
@@ -55,6 +56,8 @@ const SignUpForm = () => {
                     id='name'
                     value={username}
                     name='username'
+                    placeholder="Username"
+                    autoComplete='on'
                     onChange={handleChange}
                     required
                     />
@@ -66,6 +69,8 @@ const SignUpForm = () => {
                     id='password'
                     value={password}
                     name='password'
+                    placeholder="Password"
+                    autoComplete='off'
                     onChange={handleChange}
                     required
                     />
@@ -76,6 +81,8 @@ const SignUpForm = () => {
                     type='text'
                     id='confirmPassword' 
                     value={confirmPassword}
+                    placeholder="Confirm Password"
+                    autoComplete='off'
                     name='confirmPassword'
                     onChange={handleChange}
                     required
@@ -86,6 +93,7 @@ const SignUpForm = () => {
                     <button onClick={() => navigate('/')}>Cancel</button>
                 </div>
             </form>
+            </div>
         </main>
     );
 };

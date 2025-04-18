@@ -69,3 +69,14 @@ body, html, #root {
 .navbar a:hover {
   background-color: #555;
 }
+
+.signin-container,
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  
+}

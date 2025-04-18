@@ -14,13 +14,13 @@ const ArtworkList = () => {
    <Link key={art._id} to={`/artwork/${art._id}`}>
     <article>
         <header>
-            <h2>{art.title}</h2>
+            <h2>{art.title} by {art.artist}</h2>
             <p>
                 {`${art.author.username} posted on 
                 ${new Date(art.createdAt).toLocaleDateString()}`}
             </p>
         </header>
-        <p>{art.text}</p>
+        <p>{art.description}</p>
     </article>
    </Link>
     ))}

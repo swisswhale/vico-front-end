@@ -38,6 +38,7 @@ const SignInForm = () => {
 
     return (
         <main>
+            <div className='signin-container'>
             <h1>Sign In</h1>
             <p>{message}</p>
                 <form onSubmit={handleSubmit}>
@@ -84,6 +85,7 @@ const SignInForm = () => {
                     <button>Log In</button>
                     <button onClick={()=> navigate('/')}>Cancel</button>
                 </form>
+                </div>
         </main>
 
     )

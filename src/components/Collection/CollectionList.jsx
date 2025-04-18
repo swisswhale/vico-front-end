@@ -4,13 +4,13 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import * as userService from '../../services/userService';
 
-const CollectionList = () => {
+const CollectionList = (props) => {
   const { user } = useContext(UserContext);
   return (
   <main>
     
 
-    {/* {.artCollection.map((collection)=> (
+    {props.artCollections.map((collection)=> (
    <Link key={collection._id} to={`/collections/${collection._id}`}>
     <article>
         <header>
@@ -23,7 +23,7 @@ const CollectionList = () => {
         <p>{collection.text}</p>
     </article>
    </Link>
-    ))} */}
+    ))}
   </main>
   );
 };
