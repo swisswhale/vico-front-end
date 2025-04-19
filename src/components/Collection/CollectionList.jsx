@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CreateCollectionForm from './CreateCollectionForm';
 import EditCollectionForm from './EditCollectionForm';
-import Modal from './Modal';
+import Modal from '../Modal.jsx';
 import * as collectionService from '../../services/collectionService';
 
 const CollectionList = () => {
