@@ -7,6 +7,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
     description: ''
   });
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // New state for submission status
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,9 +20,11 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsSubmitting(true); // Disable form submission while processing
 
     if (!formData.name.trim()) {
       setError('Collection name is required');
+      setIsSubmitting(false);
       return;
     }
 
@@ -31,7 +34,9 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
       onClose();
     } catch (err) {
       console.error('Error creating collection:', err);
-      setError(err.message || 'An error occurred while creating the collection');
+      setError(err.response?.data?.message || err.message || 'An error occurred while creating the collection');
+    } finally {
+      setIsSubmitting(false); // Re-enable form submission
     }
   };
 
@@ -49,6 +54,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
             value={formData.name}
             onChange={handleChange}
             required
+            maxLength="100" // Add a reasonable max length
           />
         </div>
         <div>
@@ -58,14 +64,16 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
             name="description"
             value={formData.description}
             onChange={handleChange}
+            maxLength="500" // Add a reasonable max length
           />
         </div>
-        <button type="submit">Create Collection</button>
-        <button type="button" onClick={onClose}>Cancel</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Creating...' : 'Create Collection'}
+        </button>
+        <button type="button" onClick={onClose} disabled={isSubmitting}>Cancel</button>
       </form>
     </div>
   );
 };
 
 export default CreateCollectionForm;
-
