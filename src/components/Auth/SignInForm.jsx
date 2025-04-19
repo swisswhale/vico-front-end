@@ -1,10 +1,7 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
-
+import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../services/authService';
-
 import { UserContext } from '../../context/UserContext';
-
 
 const SignInForm = () => {
     const navigate = useNavigate();
@@ -13,83 +10,73 @@ const SignInForm = () => {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
-        confirmPassword: '',
     });
 
     const handleChange = (event) => {
-       setMessage('');
-       setFormData({...formData, [event.target.name]: event.target.value });
+        setMessage('');
+        setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
     const handleSubmit = async (event) => {
-       event.preventDefault();
-       try {
-        const userSignedIn = await signIn(formData);
-        setUser(userSignedIn);
-        navigate('/');
-       } catch (error) {
-    console.log(error);
-    setMessage(error.message);
-       }
+        event.preventDefault();
+        setMessage('');
+        try {
+            console.log('Attempting to sign in with:', formData);
+            const response = await signIn(formData);
+            console.log('Sign in response:', response);
+            if (response && response.user) {
+                console.log('Sign in successful:', response.user);
+                setUser(response.user);
+                navigate('/');
+            } else {
+                console.error('Unexpected response structure:', response);
+                setMessage('An unexpected error occurred');
+            }
+        } catch (error) {
+            console.error('Signin error in component:', error);
+            console.error('Full error object:', JSON.stringify(error, null, 2));
+            setMessage(error.message);
+        }
     };
-
-
-
 
     return (
         <main>
             <div className='authcontainer'>
-            <h1 className='signup'>Sign In</h1>
-            <p>{message}</p>
+                <h1 className='signup'>Sign In</h1>
+                {message && <p className="error-message">{message}</p>}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor='username'>Username:</label>
                         <input 
-                        type='text'
-                        id='username'
-                        value={formData.username}
-                        name='username'
-                        placeholder="Username"
-                        autoComplete='off'
-                        onChange={handleChange}
-                        required
+                            type='text'
+                            id='username'
+                            value={formData.username}
+                            name='username'
+                            placeholder="Username"
+                            autoComplete='username'
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div>
                         <label htmlFor='password'>Password:</label>
                         <input 
-                        type='text'
-                        id='passowrd'
-                        value={formData.password}
-                        name='password'
-                        placeholder="Password"
-                        autoComplete='off'
-                        onChange={handleChange}
-                        required
+                            type='password'
+                            id='password'
+                            value={formData.password}
+                            name='password'
+                            placeholder="Password"
+                            autoComplete='current-password'
+                            onChange={handleChange}
+                            required
                         />
                     </div>
-                    <div>
-                        <label htmlFor='confirmPassword'>Confirm Password:</label>
-                        <input 
-                        type='text'
-                        id='confirmPassowrd'
-                        value={formData.confirmPassword}
-                        name='confirmPassword'
-                        placeholder="Confirm Password"
-                        autoComplete='off'
-                        onChange={handleChange}
-                        required
-                        />
-                    </div>
-
-                    <button>Log In</button>
-                    <button onClick={()=> navigate('/')}>Cancel</button>
+                    <button type="submit">Log In</button>
+                    <button type="button" onClick={() => navigate('/')}>Cancel</button>
                 </form>
-                </div>
+            </div>
         </main>
-
-    )
+    );
 };
-
 
 export default SignInForm;

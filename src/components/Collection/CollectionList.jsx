@@ -1,47 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import CreateCollectionForm from './CreateCollectionForm';
-import EditCollectionForm from './EditCollectionForm';
+import EditCollectionForm from './EditCollectionForm'; // Make sure to create this component
 import Modal from '../Modal.jsx';
 import * as collectionService from '../../services/collectionService';
 
-const CollectionList = () => {
-  const [artCollections, setArtCollections] = useState([]);
+const CollectionList = ({ artCollections, setArtCollections, onRefresh }) => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingCollection, setEditingCollection] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchCollections();
-  }, []);
-
-  const fetchCollections = async () => {
+  const fetchCollections = useCallback(async () => {
+    console.log('Fetching collections...');
     try {
+      setIsLoading(true);
       const collections = await collectionService.getCollections();
-      setArtCollections(collections);
-      setIsLoading(false);
+      console.log('Fetched collections:', collections);
+      setArtCollections(Array.isArray(collections) ? collections : []);
+      setError(null);
     } catch (err) {
+      console.error('Error fetching collections:', err);
       setError('Failed to fetch collections: ' + err.message);
+    } finally {
       setIsLoading(false);
     }
-  };
+  }, [setArtCollections]);
+
+  useEffect(() => {
+    console.log('CollectionList mounted or updated');
+    fetchCollections();
+  }, [fetchCollections]);
 
   const handleCollectionCreated = (newCollection) => {
     setArtCollections(prevCollections => [...prevCollections, newCollection]);
     setIsCreateModalOpen(false);
-  };
-
-  const handleCollectionUpdated = async (updatedCollection) => {
-    try {
-      const updated = await collectionService.updateCollection(updatedCollection._id, updatedCollection);
-      setArtCollections(prevCollections => 
-        prevCollections.map(c => c._id === updated._id ? updated : c)
-      );
-      setEditingCollection(null);
-    } catch (err) {
-      setError('Failed to update collection: ' + err.message);
-    }
+    onRefresh(); // Refresh the main artwork data
   };
 
   const handleDeleteCollection = async (collectionId) => {
@@ -51,19 +46,40 @@ const CollectionList = () => {
         setArtCollections(prevCollections => 
           prevCollections.filter(c => c._id !== collectionId)
         );
+        setError(null);
+        onRefresh(); // Refresh the main artwork data
       } catch (err) {
+        console.error('Error deleting collection:', err);
         setError('Failed to delete collection: ' + err.message);
       }
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  const handleRefresh = () => {
+    fetchCollections();
+    onRefresh(); // Refresh the main artwork data
+  };
+
+  const handleEditCollection = (collection) => {
+    setEditingCollection(collection);
+    setIsEditModalOpen(true);
+  };
+
+  const handleCollectionUpdated = (updatedCollection) => {
+    setArtCollections(prevCollections =>
+      prevCollections.map(c => c._id === updatedCollection._id ? updatedCollection : c)
+    );
+    setIsEditModalOpen(false);
+    onRefresh(); // Refresh the main artwork data
+  };
+
+  console.log('Rendering CollectionList. artCollections:', artCollections);
 
   return (
     <div className="collection-list">
       <h2>Your Collections</h2>
       <button onClick={() => setIsCreateModalOpen(true)}>Add New Collection</button>
+      <button onClick={handleRefresh}>Refresh Collections</button>
       
       <Modal isOpen={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)}>
         <CreateCollectionForm 
@@ -72,17 +88,21 @@ const CollectionList = () => {
         />
       </Modal>
 
-      <Modal isOpen={!!editingCollection} onClose={() => setEditingCollection(null)}>
-        {editingCollection && (
-          <EditCollectionForm 
-            collection={editingCollection}
-            onCollectionUpdated={handleCollectionUpdated}
-            onClose={() => setEditingCollection(null)}
-          />
-        )}
+      <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
+        <EditCollectionForm 
+          collection={editingCollection}
+          onCollectionUpdated={handleCollectionUpdated}
+          onClose={() => setIsEditModalOpen(false)}
+        />
       </Modal>
 
-      {artCollections.length === 0 ? (
+      {isLoading ? (
+        <p>Loading collections...</p>
+      ) : error ? (
+        <div>
+          Error: {error} <button onClick={handleRefresh}>Retry</button>
+        </div>
+      ) : !artCollections || artCollections.length === 0 ? (
         <p>You don't have any collections yet. Create one!</p>
       ) : (
         artCollections.map(collection => (
@@ -90,7 +110,7 @@ const CollectionList = () => {
             <h3>{collection.name}</h3>
             <p>{collection.description}</p>
             <Link to={`/collections/${collection._id}/add-artwork`}>Add Artwork</Link>
-            <button onClick={() => setEditingCollection(collection)}>Edit</button>
+            <button onClick={() => handleEditCollection(collection)}>Edit</button>
             <button onClick={() => handleDeleteCollection(collection._id)}>Delete</button>
           </div>
         ))

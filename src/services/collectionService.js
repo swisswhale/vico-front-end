@@ -1,106 +1,75 @@
-import * as tokenService from './tokenService'
+import axios from 'axios';
+import * as tokenService from './tokenService';
 
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/collections`
 
-async function createCollection(collectionData) {
+export const getCollections = async () => {
   try {
-    const res = await fetch(BASE_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${tokenService.getToken()}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(collectionData)
-    })
-    
-    if (!res.ok) {
-      const errorData = await res.json()
-      throw new Error(errorData.message || 'Failed to create collection')
-    }
-    
-    return await res.json()
-  } catch (error) {
-    console.error('Error creating collection:', error)
-    throw error
-  }
-}
-
-async function getCollections() {
-  try {
-    const res = await fetch(BASE_URL, {
+    const response = await axios.get(BASE_URL, {
       headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
-    })
-
-    if (!res.ok) {
-      const errorData = await res.json()
-      throw new Error(errorData.message || 'Failed to fetch collections')
-    }
-
-    return await res.json()
+    });
+    return response.data;
   } catch (error) {
-    console.error('Error fetching collections:', error)
-    throw error
+    console.error('Error fetching collections:', error);
+    throw error;
   }
-}
+};
 
-async function getCollection(id) {
+export const createCollection = async (collectionData) => {
   try {
-    const res = await fetch(`${BASE_URL}/${id}`, {
+    const response = await axios.post(BASE_URL, collectionData, {
       headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
-    })
-
-    if (!res.ok) {
-      const errorData = await res.json()
-      throw new Error(errorData.message || 'Failed to fetch collection')
-    }
-
-    return await res.json()
+    });
+    return response.data;
   } catch (error) {
-    console.error('Error fetching collection:', error)
-    throw error
+    console.error('Error creating collection:', error);
+    throw error;
   }
-}
+};
 
-async function updateCollection(id, collectionData) {
+export const updateCollection = async (collectionId, collectionData) => {
   try {
-    const res = await fetch(`${BASE_URL}/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${tokenService.getToken()}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(collectionData)
-    })
-
-    if (!res.ok) {
-      const errorData = await res.json()
-      throw new Error(errorData.message || 'Failed to update collection')
-    }
-
-    return await res.json()
-  } catch (error) {
-    console.error('Error updating collection:', error)
-    throw error
-  }
-}
-
-async function deleteCollection(id) {
-  try {
-    const res = await fetch(`${BASE_URL}/${id}`, {
-      method: 'DELETE',
+    const response = await axios.put(`${BASE_URL}/${collectionId}`, collectionData, {
       headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
-    })
-
-    if (!res.ok) {
-      const errorData = await res.json()
-      throw new Error(errorData.message || 'Failed to delete collection')
-    }
-
-    return await res.json()
+    });
+    return response.data;
   } catch (error) {
-    console.error('Error deleting collection:', error)
-    throw error
+    console.error('Error updating collection:', error);
+    throw error;
   }
-}
+};
 
-export { createCollection, getCollections, getCollection, updateCollection, deleteCollection }
+export const deleteCollection = async (collectionId) => {
+  try {
+    await axios.delete(`${BASE_URL}/${collectionId}`, {
+      headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
+    });
+  } catch (error) {
+    console.error('Error deleting collection:', error);
+    throw error;
+  }
+};
+
+export const addArtworkToCollection = async (collectionId, artworkData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/${collectionId}/artworks`, artworkData, {
+      headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding artwork to collection:', error);
+    throw error;
+  }
+};
+
+export const getCollection = async (collectionId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/${collectionId}`, {
+      headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching collection:', error);
+    throw error;
+  }
+};

@@ -1,68 +1,67 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { signUp } from '../../services/authService';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signUp } from '../../services/authService'
+import { UserContext } from '../../context/UserContext';
 
 const SignUpForm = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-    });
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [error, setError] = useState(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-        try {
-            const user = await signUp(formData);
-            console.log('Signed up successfully:', user);
-            navigate('/');
-        } catch (error) {
-            console.error('Signup error:', error);
-            setError(error.message || 'An error occurred during sign up');
-        }
-    };
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
 
-    return (
-        <div className='authcontainer'>
-        <form onSubmit={handleSubmit}>
-            <h2 className='signup'>Sign Up</h2>
-            {error && <p className="error">{error}</p>}
-            <div>
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder='Username'
-                    autoComplete='off'
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder='Password'
-                    autoComplete='off'
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <button type="submit">Sign Up</button>
-            <button onClick={() => {navigate('/')}}>Back</button>
-        </form>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await signUp(formData);
+      if (user) {
+        setUser(user);
+        navigate('/collections');
+      }
+    } catch (err) {
+      console.error('Signup error:', err);
+      setError(err.message || 'Signup failed. Please try again.');
+    }
+  };
+
+  return (
+    <div className="auth-form-container">
+      <form onSubmit={handleSubmit} className="auth-form">
+        <h2>Create an Account</h2>
+        {error && <p className="auth-error">{error}</p>}
+        <div className="auth-form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            required
+            value={formData.username}
+            onChange={handleChange}
+          />
         </div>
-    );
+        <div className="auth-form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit" className="auth-submit-button">Sign Up</button>
+      </form>
+    </div>
+  );
 };
 
 export default SignUpForm;
