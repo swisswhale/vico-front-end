@@ -28,8 +28,9 @@ const SignUpForm = () => {
     };
 
     return (
+        <div className='authcontainer'>
         <form onSubmit={handleSubmit}>
-            <h2>Sign Up</h2>
+            <h2 className='signup'>Sign Up</h2>
             {error && <p className="error">{error}</p>}
             <div>
                 <label htmlFor="username">Username:</label>
@@ -37,6 +38,8 @@ const SignUpForm = () => {
                     type="text"
                     id="username"
                     name="username"
+                    placeholder='Username'
+                    autoComplete='off'
                     value={formData.username}
                     onChange={handleChange}
                     required
@@ -48,13 +51,17 @@ const SignUpForm = () => {
                     type="password"
                     id="password"
                     name="password"
+                    placeholder='Password'
+                    autoComplete='off'
                     value={formData.password}
                     onChange={handleChange}
                     required
                 />
             </div>
             <button type="submit">Sign Up</button>
+            <button onClick={() => {navigate('/')}}>Back</button>
         </form>
+        </div>
     );
 };
 

@@ -38,8 +38,8 @@ const SignInForm = () => {
 
     return (
         <main>
-            <div className='signin-container'>
-            <h1>Sign In</h1>
+            <div className='authcontainer'>
+            <h1 className='signup'>Sign In</h1>
             <p>{message}</p>
                 <form onSubmit={handleSubmit}>
                     <div>
