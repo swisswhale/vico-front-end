@@ -24,6 +24,7 @@ function App() {
 
   const { user } = useContext(UserContext);
   const [artCollections, setArtCollections] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchAllArtwork = async () => {
@@ -32,7 +33,7 @@ function App() {
         setArtCollections(artworkData);
       } catch (error) {
         console.error('Error fetching artwork:', error);
-        // Handle error (e.g., show error message to user)
+        setError('Failed to load artwork. Please try again later.');
       }
     };
 
@@ -43,19 +44,19 @@ function App() {
     <div style={myStyle}>
       <NavBar />
       <h1>The Visual Conversation</h1>
+      {error && <p className="error-message">{error}</p>}
       <Routes>
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
         {user ? (
           <>
-            <Route 
-              path='/collections' 
-              element={<CollectionList artCollections={artCollections} />} 
+            <Route
+              path='/collections'
+              element={<CollectionList artCollections={artCollections} setArtCollections={setArtCollections} />}
             />
             <Route path='/artwork' element={<div>Artwork Component</div>} />
-            <Route path='/collections/new' element={<div>New Collection Form</div>} />
-            <Route 
-              path='/collections/:collectionId/edit' 
-              element={<div>Edit Collection Form</div>} 
+            <Route
+              path='/collections/:collectionId/edit'
+              element={<div>Edit Collection Form</div>}
             />
           </>
         ) : (

@@ -1,3 +1,5 @@
+import { setToken, removeToken } from './tokenService';
+
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/auth`;
 
 const signUp = async (formData) => {
@@ -18,7 +20,7 @@ const signUp = async (formData) => {
         const data = await res.json();
 
         if (data.token) {
-            localStorage.setItem('token', data.token);
+            setToken(data.token);
             return data.user;
         }
 
@@ -47,7 +49,7 @@ const signIn = async (formData) => {
         const data = await res.json();
 
         if (data.token) {
-            localStorage.setItem('token', data.token);
+            setToken(data.token);
             return data.user;
         }
 
@@ -58,7 +60,20 @@ const signIn = async (formData) => {
     }
 };
 
+const signOut = () => {
+    removeToken();
+};
+
+const getUser = () => {
+    const token = localStorage.getItem('token');
+    return token
+        ? JSON.parse(atob(token.split('.')[1])).user
+        : null;
+};
+
 export {
     signUp,
     signIn,
+    signOut,
+    getUser
 };
