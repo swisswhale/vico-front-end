@@ -1,28 +1,50 @@
 import React, { useState } from 'react';
+import * as collectionService from '../../services/collectionService';
 
 const EditCollectionForm = ({ collection, onCollectionUpdated, onClose }) => {
-  const [name, setName] = useState(collection.name);
-  const [description, setDescription] = useState(collection.description);
+  const [formData, setFormData] = useState({
+    name: collection.name,
+    description: collection.description
+  });
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onCollectionUpdated({
-      ...collection,
-      name,
-      description
-    });
+    setError('');
+
+    if (!formData.name.trim()) {
+      setError('Collection name is required');
+      return;
+    }
+
+    try {
+      const updatedCollection = await collectionService.updateCollection(collection._id, formData);
+      onCollectionUpdated(updatedCollection);
+    } catch (err) {
+      setError('Failed to update collection: ' + err.message);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Edit Collection</h2>
+      {error && <p className="error-message">{error}</p>}
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Collection Name:</label>
         <input
           type="text"
           id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
           required
         />
       </div>
@@ -30,8 +52,9 @@ const EditCollectionForm = ({ collection, onCollectionUpdated, onClose }) => {
         <label htmlFor="description">Description:</label>
         <textarea
           id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
         />
       </div>
       <button type="submit">Update Collection</button>

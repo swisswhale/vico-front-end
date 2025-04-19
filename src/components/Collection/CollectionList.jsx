@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CreateCollectionForm from './CreateCollectionForm';
 import EditCollectionForm from './EditCollectionForm';
-import * as collectionService from '../../services/collectionService.js';
+import Modal from './Modal';
+import * as collectionService from '../../services/collectionService';
 
 const CollectionList = () => {
   const [artCollections, setArtCollections] = useState([]);
-  const [isCreateFormVisible, setIsCreateFormVisible] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingCollection, setEditingCollection] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,17 +27,9 @@ const CollectionList = () => {
     }
   };
 
-  const handleAddCollection = () => {
-    setIsCreateFormVisible(true);
-  };
-
   const handleCollectionCreated = (newCollection) => {
     setArtCollections(prevCollections => [...prevCollections, newCollection]);
-    setIsCreateFormVisible(false);
-  };
-
-  const handleEditCollection = (collection) => {
-    setEditingCollection(collection);
+    setIsCreateModalOpen(false);
   };
 
   const handleCollectionUpdated = async (updatedCollection) => {
@@ -70,30 +63,24 @@ const CollectionList = () => {
   return (
     <div className="collection-list">
       <h2>Your Collections</h2>
-      <button onClick={handleAddCollection}>Add New Collection</button>
+      <button onClick={() => setIsCreateModalOpen(true)}>Add New Collection</button>
       
-      {isCreateFormVisible && (
-        <div className="modal">
-          <div className="modal-content">
-            <CreateCollectionForm 
-              onCollectionCreated={handleCollectionCreated}
-              onClose={() => setIsCreateFormVisible(false)}
-            />
-          </div>
-        </div>
-      )}
+      <Modal isOpen={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)}>
+        <CreateCollectionForm 
+          onCollectionCreated={handleCollectionCreated}
+          onClose={() => setIsCreateModalOpen(false)}
+        />
+      </Modal>
 
-      {editingCollection && (
-        <div className="modal">
-          <div className="modal-content">
-            <EditCollectionForm 
-              collection={editingCollection}
-              onCollectionUpdated={handleCollectionUpdated}
-              onClose={() => setEditingCollection(null)}
-            />
-          </div>
-        </div>
-      )}
+      <Modal isOpen={!!editingCollection} onClose={() => setEditingCollection(null)}>
+        {editingCollection && (
+          <EditCollectionForm 
+            collection={editingCollection}
+            onCollectionUpdated={handleCollectionUpdated}
+            onClose={() => setEditingCollection(null)}
+          />
+        )}
+      </Modal>
 
       {artCollections.length === 0 ? (
         <p>You don't have any collections yet. Create one!</p>
@@ -103,7 +90,7 @@ const CollectionList = () => {
             <h3>{collection.name}</h3>
             <p>{collection.description}</p>
             <Link to={`/collections/${collection._id}/add-artwork`}>Add Artwork</Link>
-            <button onClick={() => handleEditCollection(collection)}>Edit</button>
+            <button onClick={() => setEditingCollection(collection)}>Edit</button>
             <button onClick={() => handleDeleteCollection(collection._id)}>Delete</button>
           </div>
         ))
