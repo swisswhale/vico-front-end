@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import CreateCollectionForm from './CreateCollectionForm';
 import EditCollectionForm from './EditCollectionForm';
 import Modal from '../Modal.jsx';
