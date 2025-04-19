@@ -15,11 +15,11 @@ const CollectionList = () => {
         setArtCollections(collections);
         setIsLoading(false);
       } catch (err) {
-        setError('Failed to fetch collections');
+        setError('Failed to fetch collections: ' + err.message);
         setIsLoading(false);
       }
     };
-
+  
     fetchCollections();
   }, []);
 
@@ -66,6 +66,9 @@ const CollectionList = () => {
 };
 
 export default CollectionList;
+
+
+// updated debug
 
 /*
 import { Link } from 'react-router';
