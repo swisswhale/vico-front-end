@@ -23,7 +23,7 @@ const SignUpForm = () => {
       const user = await signUp(formData);
       if (user) {
         setUser(user);
-        navigate('/collections');
+        navigate('/');
       }
     } catch (err) {
       console.error('Signup error:', err);
