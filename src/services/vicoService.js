@@ -16,8 +16,9 @@ const getAuthHeaders = () => ({
   'Content-Type': 'application/json',
 });
 
-export const index = async () => {
+const index = async () => {
   try {
+    console.log('Fetching from:', BASE_ARTWORK_URL); 
     const res = await fetch(BASE_ARTWORK_URL, { headers: getAuthHeaders() });
     return handleResponse(res);
   } catch (error) {
@@ -25,6 +26,7 @@ export const index = async () => {
     throw error;
   }
 };
+
 
 const show = async (artworkId) => {
   try {
@@ -128,7 +130,7 @@ const deleteCollection = async (collectionId) => {
   }
 };
 
-export const getCurrentUser = async () => {
+const getCurrentUser = async () => {
   try {
     const res = await fetch(`${BASE_USER_URL}/me`, { headers: getAuthHeaders() });
     return handleResponse(res);
