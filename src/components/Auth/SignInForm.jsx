@@ -66,7 +66,7 @@ const SignInForm = () => {
                             value={formData.password}
                             name='password'
                             placeholder="Password"
-                            autoComplete='current-password'
+                            autoComplete='off'
                             onChange={handleChange}
                             required
                         />
@@ -77,7 +77,7 @@ const SignInForm = () => {
                             type='password'
                             id='confirmPassword'
                             value={formData.cofirmPassword}
-                            name='password'
+                            name='confirmPassword'
                             placeholder=" Confirm Password"
                             autoComplete='off'
                             onChange={handleChange}

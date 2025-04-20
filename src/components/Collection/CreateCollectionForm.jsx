@@ -46,7 +46,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Collection Name:</label>
+          <label htmlFor="name" className='modal-input'>Collection Name:</label>
           <input
             type="text"
             id="name"
@@ -58,7 +58,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
           />
         </div>
         <div>
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description" className='modal-input'>Description:</label>
           <textarea
             id="description"
             name="description"
@@ -67,10 +67,10 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
             maxLength="500" // Add a reasonable max length
           />
         </div>
-        <button type="submit" disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting} className='modal-input'>
           {isSubmitting ? 'Creating...' : 'Create Collection'}
         </button>
-        <button type="button" onClick={onClose} disabled={isSubmitting}>Cancel</button>
+        <button type="button" onClick={onClose} disabled={isSubmitting} className='modal-input'>Cancel</button>
       </form>
     </div>
   );

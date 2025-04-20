@@ -4,6 +4,8 @@ import * as userService from '../../services/userService';
 import Post from "./Post";
 import CreateAPost from "./CreatePost";
 import CollectionList from "../Collection/CollectionList";
+import ArtworkList from "../Artwork/ArtworkList";
+
 
 
 
@@ -44,11 +46,8 @@ const Dashboard = () => {
                 <Post key={index} post={post} />
             ))}
         </div>
-        <div className="mycollections">
-            <CollectionList />
-
-        </div>
-
+        
+        <CollectionList  />
      </div>
        
     </main>
