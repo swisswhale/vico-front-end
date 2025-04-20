@@ -46,7 +46,7 @@ const SignInForm = () => {
                 {message && <p className="error-message">{message}</p>}
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor='username'>Username:</label>
+                        <label htmlFor='username' className='labels'>Username:</label>
                         <input 
                             type='text'
                             id='username'
@@ -59,7 +59,7 @@ const SignInForm = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor='password'>Password:</label>
+                        <label htmlFor='password' className='labels'>Password:</label>
                         <input 
                             type='password'
                             id='password'
@@ -71,8 +71,21 @@ const SignInForm = () => {
                             required
                         />
                     </div>
-                    <button type="submit">Log In</button>
-                    <button type="button" onClick={() => navigate('/')}>Cancel</button>
+                    <div>
+                        <label htmlFor='confirmPassword' className='labels'>Confirm Password:</label>
+                        <input 
+                            type='password'
+                            id='confirmPassword'
+                            value={formData.cofirmPassword}
+                            name='password'
+                            placeholder=" Confirm Password"
+                            autoComplete='off'
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <button type="submit" className='labels'>Log In</button>
+                    <button type="button" onClick={() => navigate('/')} className='labels'>Cancel</button>
                 </form>
             </div>
         </main>

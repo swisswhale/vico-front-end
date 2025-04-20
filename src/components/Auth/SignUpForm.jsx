@@ -32,12 +32,12 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="auth-form-container">
+    <div className="authcontainer">
       <form onSubmit={handleSubmit} className="auth-form">
         <h2>Create an Account</h2>
         {error && <p className="auth-error">{error}</p>}
         <div className="auth-form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username" className='labels'>Username</label>
           <input
             id="username"
             name="username"
@@ -48,7 +48,7 @@ const SignUpForm = () => {
           />
         </div>
         <div className="auth-form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className='labels'>Password</label>
           <input
             id="password"
             name="password"
@@ -58,7 +58,7 @@ const SignUpForm = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="auth-submit-button">Sign Up</button>
+        <button type="submit" className='labels'>Sign Up</button>
       </form>
     </div>
   );

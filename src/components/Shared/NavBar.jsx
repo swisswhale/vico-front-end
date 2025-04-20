@@ -15,7 +15,7 @@ const NavBar = () => {
     return (
         <nav>
             <ul className="navbar">
-                <li><Link to='/'>Home</Link></li>
+                <li><Link to='/'>Dashboard</Link></li>
                 {user ? (
                     <>
                         <li><Link to='/collections'>Art Collection</Link></li>

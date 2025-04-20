@@ -144,3 +144,7 @@ h1 {
 .modal-close:hover {
   color: #000;
 }
+
+.labels {
+  font-family: 'Pacifico', cursive;
+}
