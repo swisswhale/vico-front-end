@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-dom'
+import { useNavigate } from 'react-router';
 import * as artworkService from '../../services/artworkService';
 import * as collectionService from '../../services/collectionService';
 

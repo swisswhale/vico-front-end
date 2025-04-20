@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import CreateCollectionForm from './CreateCollectionForm';
 import EditCollectionForm from './EditCollectionForm'; // Make sure to create this component
 import Modal from '../Modal.jsx';
