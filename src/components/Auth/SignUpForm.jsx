@@ -34,7 +34,7 @@ const SignUpForm = () => {
   return (
     <div className="authcontainer">
       <form onSubmit={handleSubmit} className="auth-form">
-        <h2>Create an Account</h2>
+        <h2 className='labels'>Create an Account</h2>
         {error && <p className="auth-error">{error}</p>}
         <div className="auth-form-group">
           <label htmlFor="username" className='labels'>Username</label>
