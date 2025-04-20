@@ -5,10 +5,13 @@ const Post = ({ post })  => {
     const [comments, setComments] = useState(post.comments);
 
 
-    const handleComment = (event) => {
-     
-    }
-    
+    const handleAddComment = (event) => {
+     event.preventDefault();
+     if (!comment) return;
+     setComments([...comments, comment]);
+     setComment('')
+    };
+
  return (
     <div className="posts">
     <img src={post.imageURL} alt="post" style={
@@ -19,7 +22,7 @@ const Post = ({ post })  => {
         <p key={index}>{com}</p>
     ))};
     </div>
-    <form>
+    <form onSubmit={handleAddComment}>
         <input 
         type="text"
         value={comment}
