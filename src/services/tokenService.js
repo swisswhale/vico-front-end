@@ -14,17 +14,20 @@ export function setToken(token) {
   
   export function getUserFromToken() {
     const token = getToken();
-    if (token) {
-      try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        return { id: payload.userId, username: payload.username };
-      } catch (error) {
-        console.error('Error parsing token:', error);
-        removeToken(); // Remove invalid token
+    if (!token) return null;
+  
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expired = payload.exp < Date.now() / 1000;
+      if (expired) {
+        removeToken();
         return null;
       }
+      return { id: payload.userId, username: payload.username };
+    } catch {
+      removeToken();
+      return null;
     }
-    return null;
   }
   
   export function isTokenValid() {
@@ -35,3 +38,4 @@ export function setToken(token) {
     }
     return false;
   }
+

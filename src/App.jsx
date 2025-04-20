@@ -1,5 +1,5 @@
-import { useState, useContext, useEffect, useCallback } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect, useCallback, useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 import NavBar from './components/Shared/NavBar.jsx';
@@ -17,6 +17,14 @@ import * as collectionService from './services/collectionService.js';
 
 import image from './assets/artbackground.png';
 
+const ProtectedRoute = ({ children }) => {
+  const { user } = useContext(UserContext);
+  if (!user) {
+    return <Navigate to="/signin" replace />;
+  }
+  return children;
+};
+
 function App() {
   const myStyle = {
     backgroundImage: `url(${image})`,
@@ -25,7 +33,7 @@ function App() {
     height: '100vh',
   }
 
-  const { user } = useContext(UserContext);
+  const [user, setUser] = useState(null);
   const [artworks, setArtworks] = useState([]);
   const [collections, setCollections] = useState([]);
   const [error, setError] = useState(null);
@@ -33,7 +41,7 @@ function App() {
 
   const fetchAllData = useCallback(async () => {
     if (!user) return;
-    
+
     setIsLoading(true);
     setError(null);
     try {
@@ -60,45 +68,67 @@ function App() {
     fetchAllData();
   }, [fetchAllData]);
 
+  useEffect(() => {
+    const checkUser = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const userData = await vicoService.getCurrentUser();
+          setUser(userData);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+          localStorage.removeItem('token');
+          setUser(null);
+        }
+      }
+    };
+    
+    checkUser();
+  }, []);
+
   return (
-    <div style={myStyle}>
-      <NavBar />
-      <h1>The Visual Conversation</h1>
-      {error && <p className="error-message">{error}</p>}
-      {isLoading && <p>Loading...</p>}
-      <button onClick={handleRefresh}>Refresh Data</button>
-      <Routes>
-        <Route path='/' element={user ? <Dashboard /> : <Landing />} />
-        {user ? (
-          <>
-            <Route
-              path='/collections'
-              element={
-                <CollectionList 
-                  artCollections={collections} 
+    <UserContext.Provider value={{ user, setUser }}>
+      <div style={myStyle}>
+        <NavBar />
+        <h1>The Visual Conversation</h1>
+        {error && <p className="error-message">{error}</p>}
+        {isLoading && <p>Loading...</p>}
+        <button onClick={handleRefresh}>Refresh Data</button>
+        <Routes>
+          <Route path="/" element={user ? <Dashboard /> : <Landing />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/signin" element={<SignInForm />} />
+          <Route
+            path="/collections"
+            element={
+              <ProtectedRoute>
+                <CollectionList
+                  artCollections={collections}
                   setArtCollections={setCollections}
                   onRefresh={handleRefresh}
                 />
-              }
-            />
-            <Route path='/artwork' element={<div>Artwork Component</div>} />
-            <Route
-              path='/collections/:collectionId/edit'
-              element={<EditCollectionForm onRefresh={handleRefresh} />}
-            />
-            <Route 
-              path="/collections/:collectionId/add-artwork" 
-              element={<SearchArtwork onRefresh={handleRefresh} artworks={artworks} />} 
-            />
-          </>
-        ) : (
-          <>
-            <Route path='/signup' element={<SignUpForm />} />
-            <Route path='/signin' element={<SignInForm />} />
-          </>
-        )}
-      </Routes>
-    </div>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/collections/:collectionId/edit"
+            element={
+              <ProtectedRoute>
+                <EditCollectionForm onRefresh={handleRefresh} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/collections/:collectionId/add-artwork"
+            element={
+              <ProtectedRoute>
+                <SearchArtwork onRefresh={handleRefresh} artworks={artworks} />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
+    </UserContext.Provider>
   );
 }
 

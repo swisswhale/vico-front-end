@@ -1,141 +1,162 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import * as artworkService from '../../services/artworkService';
-import * as collectionService from '../../services/collectionService';
+import React, { useState } from 'react';
+import { fetchHarvardArtworks } from '../../services/harvardService';
+import { addArtworkToCollection } from '../../services/collectionService';
+import ArtworkList from './ArtworkList';
+import ArtworkModal from '../../ArtworkModal';
 
 const SearchArtwork = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [collections, setCollections] = useState([]);
+  const [results, setResults] = useState([]);
   const [selectedArtwork, setSelectedArtwork] = useState(null);
-  const [currentCollection, setCurrentCollection] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { collectionId } = useParams();
-  const navigate = useNavigate();
-
-  const fetchCollectionDetails = useCallback(async () => {
-    if (collectionId) {
-      try {
-        const collection = await collectionService.getCollection(collectionId);
-        setCurrentCollection(collection);
-      } catch (error) {
-        console.error('Error fetching collection details:', error);
-        setError('Failed to fetch collection details');
-      }
-    }
-  }, [collectionId]);
-
-  useEffect(() => {
-    fetchCollectionDetails();
-    fetchUserCollections();
-  }, [fetchCollectionDetails]);
-
-  const fetchUserCollections = async () => {
-    try {
-      const userCollections = await collectionService.getCollections();
-      setCollections(userCollections);
-    } catch (error) {
-      console.error('Error fetching user collections:', error);
-      setError('Failed to fetch user collections');
-    }
-  };
 
   const handleSearch = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
     try {
-      const results = await artworkService.searchArtworks(searchTerm);
-      setSearchResults(results);
+      console.log('Searching for:', searchTerm);
+      const data = await fetchHarvardArtworks(searchTerm);
+      console.log('🎨 Harvard API response:', data);
+      setResults(Array.isArray(data) ? data : data?.records || []);
     } catch (error) {
-      console.error('Error searching artworks:', error);
-      setError('Failed to search artworks');
+      console.error('Error fetching Harvard artworks:', error);
+      setError('Failed to fetch artworks. Please try again.');
+      setResults([]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleAddToCollection = async (artwork) => {
+  const handleArtworkClick = (artwork) => {
+    console.log('Artwork clicked:', artwork);
     setSelectedArtwork(artwork);
-    if (collectionId) {
-      await confirmAddToCollection(collectionId, artwork);
-    }
   };
 
-  const confirmAddToCollection = async (targetCollectionId, artwork) => {
+  const handleAddToCollection = async (artwork) => {
     try {
-      await collectionService.addArtworkToCollection(targetCollectionId, artwork);
-      alert('Artwork added to collection successfully!');
+      await addArtworkToCollection(artwork);
+      console.log('🖼️ Added to collection:', artwork);
       setSelectedArtwork(null);
-      if (collectionId) {
-        navigate(`/collections/${collectionId}`);
-      }
     } catch (error) {
       console.error('Error adding artwork to collection:', error);
-      setError('Failed to add artwork to collection');
+      // Optionally, show an error message to the user
     }
   };
 
   return (
-    <div className="search-artwork">
-      <h2>Search Artwork</h2>
-      {currentCollection && (
-        <p>Adding artwork to: {currentCollection.name}</p>
-      )}
+    <div className="search-artwork-container">
       <form onSubmit={handleSearch}>
         <input
           type="text"
+          placeholder="Search Harvard Art Museum"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search for artwork"
         />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Searching...' : 'Search'}
-        </button>
+        <button type="submit">Search</button>
       </form>
 
-      {error && <p className="error-message">{error}</p>}
+      {isLoading && <p>Loading...</p>}
+      {error && <p className="error">{error}</p>}
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="search-results">
-          {searchResults.length === 0 ? (
-            <p>No results found. Try a different search term.</p>
-          ) : (
-            searchResults.map((artwork) => (
-              <div key={artwork.id || artwork._id} className="artwork-item">
-                <img src={artwork.primaryImageSmall} alt={artwork.title} />
-                <h3>{artwork.title}</h3>
-                <p>{artwork.artistDisplayName || artwork.artist}</p>
-                <p>Date: {artwork.date}</p>
-                <p>Medium: {artwork.medium}</p>
-                <p>Dimensions: {artwork.dimensions}</p>
-                <button onClick={() => handleAddToCollection(artwork)}>
-                  {collectionId ? 'Add to This Collection' : 'Add to Collection'}
-                </button>
-              </div>
-            ))
-          )}
-        </div>
-      )}
+      <ArtworkList artworks={results} onArtworkClick={handleArtworkClick} />
 
-      {selectedArtwork && !collectionId && (
-        <div className="collection-selection">
-          <h3>Select a collection to add the artwork to:</h3>
-          {collections.map((collection) => (
-            <button 
-              key={collection._id} 
-              onClick={() => confirmAddToCollection(collection._id, selectedArtwork)}
-            >
-              {collection.name}
-            </button>
-          ))}
-        </div>
+      {selectedArtwork && (
+        <ArtworkModal
+          artwork={selectedArtwork}
+          onClose={() => setSelectedArtwork(null)}
+          onAdd={() => handleAddToCollection(selectedArtwork)}
+        />
       )}
     </div>
   );
 };
 
 export default SearchArtwork;
+
+/*import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { fetchHarvardArtworks } from '../../services/harvardService';
+import { addArtworkToCollection } from '../../services/collectionService';
+import ArtworkList from './ArtworkList';
+import ArtworkModal from '../../ArtworkModal';
+
+const SearchArtwork = () => {
+  const [searchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+  const [collectionId, setCollectionId] = useState(null);
+  const [selectedArtwork, setSelectedArtwork] = useState(null);
+
+  useEffect(() => {
+    const collectionParam = searchParams.get('collection');
+    if (collectionParam) {
+      setCollectionId(collectionParam);
+    }
+  }, [searchParams]);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await fetchHarvardArtworks(searchTerm);
+      console.log('🎨 Harvard API response:', data);
+      setResults(data.records || []);
+    } catch (error) {
+      console.error('❌ Error fetching Harvard artworks:', error);
+    }
+  };
+
+  const handleAddToCollection = async (artwork) => {
+    if (!artwork || !collectionId) {
+      console.error('🛑 Invalid artwork or missing collection ID');
+      return;
+    }
+
+    try {
+      const newArtwork = {
+        title: artwork.title,
+        artist: artwork.people?.[0]?.name || 'Unknown',
+        description: artwork.description || '',
+        date: artwork.dated || '',
+        medium: artwork.medium || '',
+        culture: artwork.culture || '',
+        technique: artwork.technique || '',
+        dimensions: artwork.dimensions || '',
+        image: artwork.primaryimageurl || '',
+        harvardId: artwork.id,
+      };
+
+      const response = await addArtworkToCollection(collectionId, newArtwork);
+      console.log('✅ Artwork added:', response);
+    } catch (error) {
+      console.error('❌ Error in handleAddToCollection:', error);
+    }
+  };
+
+  return (
+    <div className="search-artwork-container">
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Search Harvard Art Museum"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      <ArtworkList artworks={results} onSelect={setSelectedArtwork} />
+
+      {selectedArtwork && (
+        <ArtworkModal
+          artwork={selectedArtwork}
+          onClose={() => setSelectedArtwork(null)}
+          onAdd={() => handleAddToCollection(selectedArtwork)}
+        />
+      )}
+    </div>
+  );
+};
+
+export default SearchArtwork;*/
