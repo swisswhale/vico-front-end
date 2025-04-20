@@ -20,11 +20,13 @@ const CreateAPost = ( { addAPost }) => {
     return (
      <form onSubmit={handleSubmit}>
         <input 
-        type="image"
+        type="imageURL"
         placeholder="Artwork"
         value={image}
         onChange={(event) => setImage(event.target.value)}
         />
+        <br>
+        </br>
         <input 
         type="text"
         placeholder="Why this piece ..."
