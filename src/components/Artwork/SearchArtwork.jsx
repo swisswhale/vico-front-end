@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { fetchHarvardArtworks } from '../../services/harvardService';
 import { addArtworkToCollection } from '../../services/collectionService';
 import ArtworkList from './ArtworkList';
 import ArtworkModal from '../../ArtworkModal';
+=======
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-dom'
+import { useNavigate } from 'react-router';
+import * as artworkService from '../../services/artworkService';
+import * as collectionService from '../../services/collectionService';
+>>>>>>> 9ea36cf2eb05f7af12ed8740f571f945ec881bc1
 
 const SearchArtwork = () => {
   const [searchTerm, setSearchTerm] = useState('');

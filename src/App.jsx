@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useContext, useEffect, useCallback } from 'react';
+import { Routes, Route } from 'react-router';
 import './App.css';
 
 import NavBar from './components/Shared/NavBar.jsx';
