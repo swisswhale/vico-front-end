@@ -1,4 +1,5 @@
 @import url('http://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://georgemillerart.com/cdn/shop/products/il_fullxfull.2240558123_iv6c.jpg?v=1699572935&width=1946');
 
 body, html, #root {
   text-align: center;
@@ -11,6 +12,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('https://georgemillerart.com/cdn/shop/products/il_fullxfull.2240558123_iv6c.jpg?v=1699572935&width=1946');
+  background-size: cover;
 
 }
 
@@ -148,4 +151,33 @@ h1 {
 .labels {
   font-family: 'Pacifico', cursive;
   font-weight: lighter;
+}
+
+.posts {
+  
+ background-color: #82A8C9;
+ border-radius: 10px;
+ box-shadow: 10px 10px 10px 10px  #000;
+ max-width: max-content;
+ 
+ 
+}
+
+.posts-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-items: space-evenly;
+  
+}
+
+.comments {
+ display: flex;
+ justify-content: space-evenly;
+ align-items: center;
+ border: 3px solid rgb(0, 0, 0);
+ 
+  
+  
 }

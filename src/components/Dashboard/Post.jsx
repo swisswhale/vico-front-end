@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const Post = ({ post })  => {
     const [comment, setComment] = useState('');
-    const [comments, setComments] = useState(post.comments);
+    const [comments, setComments] = useState([...post.comments]);
 
 
     const handleAddComment = (event) => {
@@ -13,14 +13,14 @@ const Post = ({ post })  => {
     };
 
  return (
+    
     <div className="posts">
-    <img src={post.imageURL} alt="post" style={
-        {width: '300px'}}/>
-    <p>Post Caption: {post.caption}</p>
+    <img src={post.imageURL} alt="post" />
+    <p>Caption: {post.caption}</p>
     <div className="comments">
-    {comments.map((com, index) => (
-        <p key={index}>{com}</p>
-    ))};
+    {comments.map((comment, index) => (
+        <p key={index}>{comment}</p>
+    ))}
     </div>
     <form onSubmit={handleAddComment}>
         <input 
@@ -33,6 +33,7 @@ const Post = ({ post })  => {
         <button type="submit"> Submit Comment</button>
     </form>
     </div>
+   
 
  )
 }

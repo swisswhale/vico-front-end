@@ -41,13 +41,16 @@ const Dashboard = () => {
 
      <div className="dashboard">
         <CreateAPost addAPost={addAPost}/>
+        <br>
+        </br>
+        <div className="posts-container">
         <div className="posts">
             {posts.map((post, index) => (
                 <Post key={index} post={post} />
             ))}
         </div>
+        </div>
         
-        <CollectionList  />
      </div>
        
     </main>
