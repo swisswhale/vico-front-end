@@ -59,9 +59,8 @@ Visual Conversation is a full-stack MERN app where users explore real artwork fr
 I am a software engineering student that is eager to learn diffrerent ways in executing code. I look for to building many websites and apps that correspond with making daily tasks easier. Building code that executes the way you need it to can be stressful but the finshed product is worth every error!
     
 ## Works Cited:
-https://www.w3schools.com/html/html_forms.asp
 - JSON file (JavaScript Object Notation) is a text-based format that stores and exchanges data in a way that's both human-readable and machine-parsable. The file most be fetched from a local or remote server in order to function. In this project ti realized that i didnt need to have a json file if i use an array in my javascript.
-- https://www.tutorialspoint.com/json/json_syntax.html
-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
-- https://generalassembly.instructure.com/courses/633/pages/men-stack-session-auth?module_item_id=51544
-- https://generalassembly.instructure.com/courses/633/pages/men-stack-embedding-related-data-skyrockit?module_item_id=51546
+- https://www.geeksforgeeks.org/reactjs-usenavigate-hook/
+- https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox
+- https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Frameworks_libraries/React_components
+- https://www.w3schools.com/react/react_router.asp
