@@ -84,6 +84,8 @@ const CollectionList = ({ artCollections, setArtCollections, onRefresh }) => {
       <h2>Your Collections</h2>
       <button onClick={() => setIsCreateModalOpen(true)}>Add New Collection</button>
       <button onClick={handleRefresh}>Refresh Collections</button>
+      <br>
+      </br>
       
       <Modal isOpen={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)}>
         <CreateCollectionForm 
@@ -115,9 +117,9 @@ const CollectionList = ({ artCollections, setArtCollections, onRefresh }) => {
               {collection.name}
             </h3>
             <p>{collection.description}</p>
-            <Link to={`/collections/${collection._id}/add-artwork`}>Add Artwork</Link>
-            <button onClick={() => handleEditCollection(collection)}>Edit</button>
-            <button onClick={() => handleDeleteCollection(collection._id)}>Delete</button>
+            <Link to={`/collections/${collection._id}/add-artwork`} className="labels"><button className='labels'>Add Artwork</button></Link>
+            <button onClick={() => handleEditCollection(collection)} className="labels">Edit</button>
+            <button onClick={() => handleDeleteCollection(collection._id)} className="labels">Delete</button>
           </div>
         ))
       )}

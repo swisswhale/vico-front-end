@@ -200,3 +200,12 @@ h1 {
   font-weight: lighter;
   color: rgb(203, 207, 211);
 }
+
+.collection-item {
+  background: rgb(158, 190, 12);
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 10px 10px 10px 10px rgba(0,0,0,0);
+}
