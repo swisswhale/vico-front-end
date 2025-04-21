@@ -37,7 +37,7 @@ Visual Conversation is a full-stack MERN app where users explore real artwork fr
 * Link to trello or planning board - (https://trello.com/invite/b/67f46dc14e58ddb8140b0949/ATTI62b0fe48498f889be6e51e5b07aafd0a560A2302/mern-group-app)
 
 ## <a name="design"></a>Design
-* Baseball is my favorite sport, when asked to make a application using node.js express etc., it seemed like concept that I could easier learn to express through a nice logging application. All Design elements implemented using HTML and CSS. 
+* When asked to build a full CRUD app using Reat + Vite for the frontend and Express and Node for the backend, my partner and I thought a art app would be perfect. In this app a user will be allowed to create an account. Once a user has an account they can sign in and view a dashboard. This dashboard will include a space for the user to create a post of their favorite artwork. Users will also have the ability to add the artwork to a collection. Users will be able to comment on, delete, and post about their favorite collections.
 
 
 ## <a name="nextsteps"></a>Project Next Steps
@@ -62,6 +62,7 @@ I am a software engineering student that is eager to learn diffrerent ways in ex
 ## Works Cited:
 - UseEffect is a React Hook that manages side effects in functional components. Side effects are operations that interact with the outside world or the browser's environment, such as fetching data, setting timers, or directly manipulating the DOM.
 - UseNavigate hook in React Router v6 is used for programmatic navigation. It provides a function that allows developers to change the current URL and navigate to different routes within the application.
+- https://www.youtube.com/watch?v=SqcY0GlETPk
 - https://www.w3schools.com/react/react_css_styling.asp
 - https://www.geeksforgeeks.org/reactjs-usenavigate-hook/
 - https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox
