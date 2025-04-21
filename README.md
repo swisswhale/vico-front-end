@@ -17,6 +17,13 @@ Visual Conversation is a full-stack MERN app where users explore real artwork fr
 
 ## <a name="technologiesused"></a>Technologies Used
 * React + Vite
+* React-Router
+* React-Router-Dom
+* Link
+* Axios
+* UseNavigate
+* UseState
+* UseParams
 * MONGODB
 * HTML
 * CSS
