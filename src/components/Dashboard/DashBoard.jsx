@@ -36,7 +36,7 @@ const Dashboard = () => {
 
     return (
     <main>
-        <h1>Welome to Vico, {user?.username}</h1>
+        <h1>Welcome to Vico, {user?.username}</h1>
         <p>Share your favorite artwork from you collection!</p>
 
      <div className="dashboard">
