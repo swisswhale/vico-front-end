@@ -3,7 +3,7 @@ import * as tokenService from './tokenService';
 
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/collections`;
 
-// Create an axios instance with default config
+
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -11,7 +11,7 @@ const api = axios.create({
   },
 });
 
-// Add a request interceptor to include the token in every request
+
 api.interceptors.request.use((config) => {
   const token = tokenService.getToken();
   if (token) {
@@ -22,7 +22,7 @@ api.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-// Helper function to handle API errors
+
 const handleApiError = (error, customMessage) => {
   console.error(customMessage, error);
   if (error.response) {

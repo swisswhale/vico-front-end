@@ -1,4 +1,4 @@
-// src/components/Collection/CollectionDetails.jsx
+
 import React, { useState } from 'react';
 import Modal from '../Modal';
 

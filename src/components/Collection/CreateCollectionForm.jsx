@@ -7,7 +7,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
     description: ''
   });
   const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state for submission status
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +20,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setIsSubmitting(true); // Disable form submission while processing
+    setIsSubmitting(true); 
 
     if (!formData.name.trim()) {
       setError('Collection name is required');
@@ -36,7 +36,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
       console.error('Error creating collection:', err);
       setError(err.response?.data?.message || err.message || 'An error occurred while creating the collection');
     } finally {
-      setIsSubmitting(false); // Re-enable form submission
+      setIsSubmitting(false); 
     }
   };
 
@@ -54,7 +54,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
             value={formData.name}
             onChange={handleChange}
             required
-            maxLength="100" // Add a reasonable max length
+            maxLength="100" 
           />
         </div>
         <div>
@@ -64,7 +64,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            maxLength="500" // Add a reasonable max length
+            maxLength="500" 
           />
         </div>
         <button type="submit" disabled={isSubmitting} className='modal-input'>

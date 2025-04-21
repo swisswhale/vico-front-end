@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000'; // or whatever port your backend is running on
+const BASE_URL = 'http://localhost:3000'; 
 
 export const fetchHarvardArtworks = async (query) => {
   try {

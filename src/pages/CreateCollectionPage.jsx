@@ -32,7 +32,7 @@ const CreateCollectionPage = () => {
         try {
             const newCollection = await collectionService.createCollection(formData);
             console.log('New collection created:', newCollection);
-            navigate('/collections'); // final redirect TBD
+            navigate('/collections'); 
         } catch (err) {
             console.error('Error creating collection:', err);
             setError(err.message || 'An eror occured while creating the collection');

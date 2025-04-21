@@ -10,7 +10,6 @@ const SearchArtworkPage = () => {
     setIsLoading(true);
     setError(null);
     try {
-      // Assuming SearchArtwork component handles the actual API call
       const results = await SearchArtwork.search(query);
       setSearchResults(results);
     } catch (err) {
