@@ -35,10 +35,10 @@ const EditCollectionForm = ({ collection, onCollectionUpdated, onClose }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Edit Collection</h2>
+      <h2 className="collectionmodalcss">Edit Collection</h2>
       {error && <p className="error-message">{error}</p>}
       <div>
-        <label htmlFor="name">Collection Name:</label>
+        <label htmlFor="name" className='modal-inputlabel'>Collection Name:<span></span></label>
         <input
           type="text"
           id="name"
@@ -49,7 +49,7 @@ const EditCollectionForm = ({ collection, onCollectionUpdated, onClose }) => {
         />
       </div>
       <div>
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="description" className='modal-inputlabel'>Description:</label>
         <textarea
           id="description"
           name="description"
@@ -57,8 +57,8 @@ const EditCollectionForm = ({ collection, onCollectionUpdated, onClose }) => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Update Collection</button>
-      <button type="button" onClick={onClose}>Cancel</button>
+      <button type="submit" className='modal-input'>Update Collection</button>
+      <button type="button" onClick={onClose} className='modal-inputcancel'>Cancel</button>
     </form>
   );
 };

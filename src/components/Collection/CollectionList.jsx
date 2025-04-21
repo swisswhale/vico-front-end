@@ -82,8 +82,8 @@ const CollectionList = ({ artCollections, setArtCollections, onRefresh }) => {
   return (
     <div className="collection-list">
       <h2>Your Collections</h2>
-      <button onClick={() => setIsCreateModalOpen(true)}>Add New Collection</button>
-      <button onClick={handleRefresh}>Refresh Collections</button>
+      <button onClick={() => setIsCreateModalOpen(true)} className="addcollection">Add New Collection</button>
+      <button onClick={handleRefresh} className='refresh'>Refresh Collections</button>
       <br>
       </br>
       
@@ -119,10 +119,10 @@ const CollectionList = ({ artCollections, setArtCollections, onRefresh }) => {
             </h3>
             <p>{collection.description}</p>
             <Link to={`/collections/${collection._id}/add-artwork`}>
-              <button className="labels">Add Artwork</button>
+              <button className="addlabel">Add Artwork</button>
             </Link>
             <button onClick={() => handleEditCollection(collection)} className="labels">Edit</button>
-            <button onClick={() => handleDeleteCollection(collection._id)} className="labels">Delete</button>
+            <button onClick={() => handleDeleteCollection(collection._id)} className='modal-inputcancel'>Delete</button>
           </div>
         ))}
       </div>

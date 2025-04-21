@@ -70,7 +70,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
         <button type="submit" disabled={isSubmitting} className='modal-input'>
           {isSubmitting ? 'Creating...' : 'Create Collection'}
         </button>
-        <button type="button" onClick={onClose} disabled={isSubmitting} className='modal-input'>Cancel</button>
+        <button type="button" onClick={onClose} disabled={isSubmitting} className='modal-inputcancel'>Cancel</button>
       </form>
     </div>
   );

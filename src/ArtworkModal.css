@@ -1,4 +1,5 @@
 @import url('http://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://thumbs.dreamstime.com/b/original-acrylic-painting-night-landscape-beautiful-illustration-starry-sky-trees-forest-artwork-art-canvas-155216360.jpg');
 
 .artwork-grid {
     display: grid;
@@ -32,7 +33,7 @@
   }
   
   .modal-content {
-    background-color: rgba(56, 13, 212, 0.5);
+    background-color: black;
     padding: 20px;
     border-radius: 5px;
     max-width: 80%;
@@ -47,6 +48,10 @@
 
   .modal-close {
     font-family: 'Pacifico', cursive;
+  }
+
+  .modal-close:hover {
+    color: #ca0e0e;
   }
 
   .modal-input {

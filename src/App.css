@@ -1,6 +1,7 @@
 @import url('http://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://georgemillerart.com/cdn/shop/products/il_fullxfull.2240558123_iv6c.jpg?v=1699572935&width=1946');
 
+
 body, html, #root {
   text-align: center;
   height: 100%;
@@ -119,7 +120,7 @@ h1 {
 }
 
 .modal-content {
-  background-color: #82A8C9;
+  background-color: #5c9acf;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -135,8 +136,61 @@ h1 {
 
 .modal-input {
   color: rgb(220, 224, 228);
-  background-color: #000;
+  background-color: #075c0e;
 }
+
+.modal-inputcancel {
+  color: rgb(220, 224, 228);
+  background-color: #bd0a0a;
+  font-family: 'Pacifico', cursive;
+}
+
+.refresh {
+    color: rgb(220, 224, 228);
+    background-color: #771717;
+   
+}
+
+.addlabel {
+  font-family: 'Pacifico', cursive;
+  font-weight: lighter;
+  background-color: #666e67;
+  color: #0c0303;
+}
+
+.addlabel:hover {
+  background-color: #055713;
+  color: #0c0303;
+}
+
+
+.addcollection {
+  color: rgb(220, 224, 228);
+  background-color: #17772f;
+ 
+}
+
+.addcollection:hover {
+  background-color: #290da5;
+}
+
+.refresh:hover {
+  background-color: #333;
+}
+
+.modal-input:hover {
+  background-color: #5c9acf;
+}
+
+.modal-inputcancel:hover {
+  background-color: #fc0707;
+}
+
+.modal-inputlabel {
+  color: rgb(220, 224, 228);
+  font-family: 'Pacifico', cursive;
+}
+
 
 .modal-inputlabel {
   color: rgb(220, 224, 228);
@@ -145,6 +199,8 @@ h1 {
 
 .collectionmodalcss {
   color: aliceblue;
+  font-family: 'Pacifico', cursive;
+  font-weight: lighter;
 }
 
 .modal-close {
@@ -155,7 +211,7 @@ h1 {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: #e2dcdc;
 }
 
 .modal-close:hover {
@@ -216,6 +272,7 @@ h1 {
 }
 
 .collection-item {
+  background-color: #e9e764;
   break-inside: avoid;
   margin-bottom: 1.5rem;
   padding: 1rem;
