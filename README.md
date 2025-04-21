@@ -1,7 +1,9 @@
 # The Visual Conversation App
 
-#### Connect With Players and Coaches Near You!! 
-![Screenshot 2025-02-25 171955](https://github.com/user-attachments/assets/51c05bbc-e688-4fa4-9d86-39ea5906bcc9)
+#### Share and Discuss Your Favorite Artwork!! 
+![Screenshot vico](https://github.com/user-attachments/assets/7ba6c2e5-afa3-41e6-86e6-6e282d945834)
+
+
 
 ## Description
 Visual Conversation is a full-stack MERN app where users explore real artwork from museum databases like The Met and Harvard Art Museums. They can view detailed information about each piece, including auction results, and save favorites to their own digital art collections. These collections can be shared with other users, who can leave comments and ratings. The app also highlights the most popular artworks on the platform. With secure login and full CRUD functionality, Visual Conversation makes discovering and sharing art a social experience.
@@ -43,7 +45,7 @@ Visual Conversation is a full-stack MERN app where users explore real artwork fr
 
 
 * You can view the repository:
-[Github.com](https://github.com/ochouno2364/strike-one-meetings-app)
+[Github.com](https://github.com/swisswhale/vico-front-end/tree/main)
 * If unable to view please go live locally through VS Code -->
 
 ## <a name="author"></a>About The Author
