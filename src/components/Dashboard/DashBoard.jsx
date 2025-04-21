@@ -46,7 +46,9 @@ const Dashboard = () => {
         <div className="posts-container">
         <div className="posts">
             {posts.map((post, index) => (
-                <Post key={index} post={post} />
+                <div key={index} className="post">
+                <Post post={post} />
+                </div>
             ))}
         </div>
         </div>

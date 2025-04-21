@@ -17,7 +17,7 @@ const Post = ({ post })  => {
     const { user } = useContext(UserContext)
  return (
     
-    <div className="posts">
+    <div className="apost">
     <img src={post.imageURL} alt="post" />
     <p>Caption: {post.caption}</p>
     <div className="comments">
