@@ -19,7 +19,7 @@ const Post = ({ post })  => {
     
     <div className="apost">
     <img src={post.imageURL} alt="post" />
-    <p>Caption: {post.caption}</p>
+    <p className="caption">Caption: {post.caption}</p>
     <div className="comments">
     {comments.map((comment, index) => (
         <div className="comment" key={index}>{user.username}:{comment}</div>
@@ -33,7 +33,7 @@ const Post = ({ post })  => {
         placeholder="How do you feel ..."
         onChange={(event) => setComment([event.target.value])}
         />
-        <button type="submit"> Submit Comment</button>
+        <button type="submit" className="postbutton"> Submit Comment</button>
     </form>
     </div>
    

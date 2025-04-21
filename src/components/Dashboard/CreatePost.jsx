@@ -33,7 +33,7 @@ const CreateAPost = ( { addAPost }) => {
         value={caption}
         onChange={(event) => setCaption(event.target.value)}
         />
-        <button type="submit">Add Post</button>
+        <button className="postbutton" type="submit">Add Post</button>
      </form>
     );
 }

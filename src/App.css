@@ -160,7 +160,7 @@ h1 {
 }
 
 .post {
-  background: rgb(62, 163, 22);
+  background: rgb(21, 66, 3);
   break-inside: avoid;
   margin-bottom: 1.5rem;
   padding: 1rem;
@@ -179,10 +179,24 @@ h1 {
 }
 
 .comment {
-  background-color: #f0f0f0;
+  background-color: #e4db90;
+  font-family: Arial, Helvetica, sans-serif;
   padding: 0.3rem 1rem;
   border-radius: 6px;
   width: fit-content;
   max-width: 90%;
  
+}
+
+.postbutton {
+  background-color: aqua;
+  font-family: 'Pacifico', cursive;
+  font-weight: lighter;
+
+}
+
+.caption {
+  font-family: 'Pacifico', cursive;
+  font-weight: lighter;
+  color: rgb(203, 207, 211);
 }
