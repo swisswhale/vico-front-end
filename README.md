@@ -24,6 +24,7 @@ Visual Conversation is a full-stack MERN app where users explore real artwork fr
 * UseNavigate
 * UseState
 * UseParams
+* UseEffect
 * MONGODB
 * HTML
 * CSS
@@ -59,7 +60,9 @@ Visual Conversation is a full-stack MERN app where users explore real artwork fr
 I am a software engineering student that is eager to learn diffrerent ways in executing code. I look for to building many websites and apps that correspond with making daily tasks easier. Building code that executes the way you need it to can be stressful but the finshed product is worth every error!
     
 ## Works Cited:
-- JSON file (JavaScript Object Notation) is a text-based format that stores and exchanges data in a way that's both human-readable and machine-parsable. The file most be fetched from a local or remote server in order to function. In this project ti realized that i didnt need to have a json file if i use an array in my javascript.
+- UseEffect is a React Hook that manages side effects in functional components. Side effects are operations that interact with the outside world or the browser's environment, such as fetching data, setting timers, or directly manipulating the DOM.
+- UseNavigate hook in React Router v6 is used for programmatic navigation. It provides a function that allows developers to change the current URL and navigate to different routes within the application.
+- https://www.w3schools.com/react/react_css_styling.asp
 - https://www.geeksforgeeks.org/reactjs-usenavigate-hook/
 - https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox
 - https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Frameworks_libraries/React_components
