@@ -111,18 +111,22 @@ const CollectionList = ({ artCollections, setArtCollections, onRefresh }) => {
       ) : !artCollections || artCollections.length === 0 ? (
         <p>You don't have any collections yet. Create one!</p>
       ) : (
-        artCollections.map(collection => (
+        <div className="collection-container">
+        {artCollections.map((collection) => (
           <div key={collection._id} className="collection-item">
-            <h3 onClick={() => handleCollectionClick(collection)} style={{cursor: 'pointer'}}>
+            <h3 onClick={() => handleCollectionClick(collection)} style={{ cursor: 'pointer' }}>
               {collection.name}
             </h3>
             <p>{collection.description}</p>
-            <Link to={`/collections/${collection._id}/add-artwork`} className="labels"><button className='labels'>Add Artwork</button></Link>
+            <Link to={`/collections/${collection._id}/add-artwork`}>
+              <button className="labels">Add Artwork</button>
+            </Link>
             <button onClick={() => handleEditCollection(collection)} className="labels">Edit</button>
             <button onClick={() => handleDeleteCollection(collection._id)} className="labels">Delete</button>
           </div>
-        ))
-      )}
+        ))}
+      </div>
+    )}
 
       {selectedCollection && (
         <CollectionDetails

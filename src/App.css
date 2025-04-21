@@ -133,6 +133,20 @@ h1 {
   margin: auto;
 }
 
+.modal-input {
+  color: rgb(220, 224, 228);
+  background-color: #000;
+}
+
+.modal-inputlabel {
+  color: rgb(220, 224, 228);
+  font-family: 'Pacifico', cursive;
+}
+
+.collectionmodalcss {
+  color: aliceblue;
+}
+
 .modal-close {
   position: absolute;
   top: 10px;
@@ -202,10 +216,17 @@ h1 {
 }
 
 .collection-item {
-  background: rgb(158, 190, 12);
   break-inside: avoid;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 10px 10px 10px 10px rgba(0,0,0,0);
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 10px  #000;
+  max-width: fit-content;
+}
+
+.collection-container {
+  column-count: 5;
+  column-gap: 1.5rem;
+  padding: 1rem;
+  margin-left: 5px;
 }

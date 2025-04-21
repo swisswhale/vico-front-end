@@ -42,11 +42,11 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
 
   return (
     <div className="create-collection-form">
-      <h2>Create New Collection</h2>
+      <h2 className="collectionmodalcss">Create New Collection</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name" className='modal-input'>Collection Name:</label>
+          <label htmlFor="name" className='modal-inputlabel'>Collection Name:</label>
           <input
             type="text"
             id="name"
@@ -58,7 +58,7 @@ const CreateCollectionForm = ({ onCollectionCreated, onClose }) => {
           />
         </div>
         <div>
-          <label htmlFor="description" className='modal-input'>Description:</label>
+          <label htmlFor="description" className='modal-inputlabel'>Description:</label>
           <textarea
             id="description"
             name="description"
